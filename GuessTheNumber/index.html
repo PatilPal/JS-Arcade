@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>ColorGame</title>
+    <script src="script.js" defer></script>
+    <title>Guess The Number</title>
 </head>
+
 <body>
-    
+    <nav>
+        <a href="/" aria-current="page">Home</a>
+    </nav>
+    <main>
+        <h1>Guess The Number</h1>
+        <button id="startGame">Start Game</button>
+
+        <input type="number" placeholder="Enter your guess" id="guessInput" hidden>
+        <button id="submitGuess" hidden>Submit Guess</button>
+
+        <p id="message">🎮 Let's start the game!</p>
+        <p id="attempts" hidden>Attempts: 0</p>
+
+        <button id="restartGame" hidden>Restart Game</button>
+
+    </main>
 </body>
+
 </html>
