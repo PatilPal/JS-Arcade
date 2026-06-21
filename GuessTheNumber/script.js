@@ -12,18 +12,44 @@ function generateNumber() {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-button.addEventListener("click", () => {
+function showStartScreen() {
+  button.hidden = false;
+
+  guessInput.hidden = true;
+  submitGuess.hidden = true;
+  attemptsDisplay.hidden = true;
+  restartButton.hidden = true;
+
+  messageDisplay.hidden = false;
+  messageDisplay.textContent = "🎮 Let's start the game!";
+}
+
+function startGame() {
   numberToGuess = generateNumber();
-  attemptsDisplay.textContent = `Attempts: ${attempts}`;
+
+  attempts = 0;
   previousGuesses.clear();
+
+  attemptsDisplay.textContent = `Attempts: ${attempts}`;
+
   button.hidden = true;
   guessInput.hidden = false;
-  messageDisplay.hidden = false;
   submitGuess.hidden = false;
   attemptsDisplay.hidden = false;
 
+  guessInput.focus();
   messageDisplay.textContent = "Enter a number between 1 and 100";
-});
+}
+
+function endGame() {
+  guessInput.hidden = true;
+  submitGuess.hidden = true;
+  attemptsDisplay.hidden = true;
+
+  restartButton.hidden = false;
+}
+
+button.addEventListener("click", startGame);
 
 submitGuess.addEventListener("click", () => {
   let guess = parseInt(guessInput.value);
@@ -46,10 +72,7 @@ submitGuess.addEventListener("click", () => {
 
   if (guess === numberToGuess) {
     messageDisplay.textContent = `🎉Congratulations! You guessed the number ${numberToGuess} in ${attempts} attempts.`;
-    guessInput.hidden = true;
-    submitGuess.hidden = true;
-    attemptsDisplay.hidden = true;
-    restartButton.hidden = false;
+    endGame();
   } else if (guess < numberToGuess) {
     messageDisplay.textContent = `Number is too Low!.`;
   } else {
@@ -61,17 +84,8 @@ submitGuess.addEventListener("click", () => {
 });
 
 restartButton.addEventListener("click", () => {
-  attempts = 0;
-  attemptsDisplay.textContent = `Attempts: ${attempts}`;
-  previousGuesses.clear();
-
-  button.hidden = false;
-  guessInput.hidden = true;
-  submitGuess.hidden = true;
-  attemptsDisplay.hidden = true;
-  restartButton.hidden = true;
-  messageDisplay.hidden = false;
-  messageDisplay.textContent = "🎮 Let's start the game!";
-
+  showStartScreen();
   guessInput.value = "";
 });
+
+showStartScreen();
